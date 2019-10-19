@@ -15,6 +15,8 @@
 
   <link rel="stylesheet" href="{{ asset('nguoidung/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('nguoidung/css/custom.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugin/toastr/toastr.min.css') }}">
+
 </head>
 <body>
     <!-- Load Facebook SDK for JavaScript -->
@@ -58,7 +60,8 @@
   <script src="{{ asset('nguoidung/js/main.js') }}"></script>
   <script src="{{ asset('nguoidung/js/giohang.js') }}"></script>
   <script src="{{ asset('nguoidung/js/timkiem.js') }}"></script>
+  <script src="{{ asset('plugin/toastr/toastr.min.js') }}"></script>
   @yield('scripts')
-
+  @include('nguoidung.layouts.message')
 </body>
 </html>

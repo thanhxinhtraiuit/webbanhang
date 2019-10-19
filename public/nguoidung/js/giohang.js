@@ -4,6 +4,7 @@ $(document).ready(function(){
 	$(document).on('click','.themgiohang',function(){
 		var id = $(this).attr('id');
 		var gia = $(this).attr('gia');
+		var ten =$(this).parent().parent().parent().parent().parent().find('.card-body').find('.card-product__title a').text();
 		$.ajax({
 			url:'/them-gio-hang',
 			method:'get',
@@ -16,7 +17,10 @@ $(document).ready(function(){
        			// count();
        			var tong =$('.nav-shop__circle').text();
        			var tong =1+ parseInt(tong);
+
        			$('.nav-shop__circle').text(tong);
+
+       			toastr.success('Da them ' + ten + ' vao gio hang');
             }
 		});
 

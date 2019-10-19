@@ -63,3 +63,9 @@ Route::get('load-more','NguoidungController@GetLoadmore')->name('loadmore');
 
 Route::get('xep-giam-dan','NguoidungController@GetDesc')->name('GetDesc');
 Route::get('xep-tang-dan','NguoidungController@GetAsc')->name('GetAsc');
+
+
+Route::get('dang-nhap','NguoidungController@GetDangnhap');
+Route::post('dang-nhap','NguoidungController@PostDangnhap');
+Route::get('dang-ky','NguoidungController@GetDangky');
+Route::post('dang-ky','NguoidungController@PostDangky');

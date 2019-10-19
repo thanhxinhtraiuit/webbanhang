@@ -67,7 +67,7 @@ class KhohangController extends Controller
         $instock=$data->in_stock;
          if($data->in_stock<$request->soluong){
 
-            return back()->with('error','So Luong XUat Lon Hon SO luong Trong Kho');
+            return back()->with('that-bai','So Luong XUat Lon Hon SO luong Trong Kho');
 
         }
       
@@ -107,7 +107,7 @@ class KhohangController extends Controller
 
         $inventoryman->save();
         $inventoryout->save(); 
-            return back()->with('success','luu thanh cong');
+            return back()->with('thanh-cong','luu thanh cong');
                     
     }
     public function PostNhaphang(Request $request){

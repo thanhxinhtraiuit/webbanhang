@@ -66,7 +66,7 @@
                 </li>
                 {{-- <button><i class="ti-search"></i></button></li> --}}
               <li class="nav-item"><button class='btngiohang' href={{ route('giohang') }}><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
-              <li class="nav-item"><a class="button button-header" href="#">Buy Now</a></li>
+              <li class="nav-item"><a class="button button-header" href="#">Login</a></li>
             </ul>
           </div>
         </div>
