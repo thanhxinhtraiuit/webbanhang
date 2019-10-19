@@ -7,13 +7,15 @@ use App\User;
 use App\Sanpham;
 use Hash;
 use Auth;
+use AuthenticatesUsers;
 
 
 class NguoidungController extends Controller
 {
     //
+    // use AuthenticatesUsers;
     public function GetTrangchu (){
-        dd(Auth::user());
+        // dd(Auth::user());
     	$data['trending']=Sanpham::where('khuyen_mai','=',2)->take(8)->get();
     	$data['sale']=Sanpham::where('khuyen_mai','=',1)->take(8)->get();
     	$data['lastnew']=Sanpham::orderby('updated_at','desc')->take(8)->get();
