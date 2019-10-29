@@ -14,8 +14,9 @@
           </div>
           <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
             <div class="hero-banner__content">
-              <h4>DUong Thanh Mobile</h4>
-              <h1>Cac loai Dien Thoai</h1>
+              <h1>Cute Shop</h1>
+              <h4>Chuyên Các Loại Phụ Kiện</h4>
+              
               <p></p>
               <a class="button button-hero" href="#">Browse Now</a>
             </div>

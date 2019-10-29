@@ -16,9 +16,9 @@ class NguoidungController extends Controller
     // use AuthenticatesUsers;
     public function GetTrangchu (){
         // dd(Auth::user());
-    	$data['trending']=Sanpham::where('khuyen_mai','=',2)->take(8)->get();
-    	$data['sale']=Sanpham::where('khuyen_mai','=',1)->take(8)->get();
-    	$data['lastnew']=Sanpham::orderby('updated_at','desc')->take(8)->get();
+    	$data['trending']=Sanpham::where('khuyen_mai','=',1)->take(12)->get();
+    	$data['sale']=Sanpham::where('khuyen_mai','=',2)->take(12)->get();
+    	$data['lastnew']=Sanpham::orderby('updated_at','desc')->take(16)->get();
     	return view('nguoidung.layouts.sitemain',$data);
 
     	

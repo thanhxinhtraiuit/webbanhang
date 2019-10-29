@@ -42,7 +42,8 @@ Route::group(['prefix' => 'admin'], function() {
 
 });
 
-Route::get('trang-chu','NguoidungController@GetTrangchu')->name('trangchu');
+// Route::get('trang-chu','NguoidungController@GetTrangchu')->name('trangchu');
+Route::get('','NguoidungController@GetTrangchu')->name('trangchu');
 
 Route::get('gio-hang','GiohangController@GetGiohang')->name('giohang');
 
