@@ -107,7 +107,7 @@
               <div class="input-group filter-bar-search">
                 <input type="text" placeholder="Search">
                 <div class="input-group-append">
-                  <button type="button"><i class="ti-search"></i></button>
+                  <button type="button"><i class="ti-search" ></i></button>
                 </div>
               </div>
             </div>
@@ -122,14 +122,14 @@
                   <div class="card-product__img">
                     <img class="card-img" src="{{ asset('upload').'/'.$element->hinh }}" alt="">
                     <ul class="card-product__imgOverlay">
-                      <li><button><i class="ti-search"></i></button></li>
+                      <li><button><a class="ti-search "  href='{{ route('chitietsanpham',[$element->id,$element->ten_khong_dau]) }}'></a></button></li>
                       <li><button><i class="ti-shopping-cart themgiohang" id={{ $element->id }} gia={{ $element->gia }} ></i></button></li>
                       <li><button><i class="ti-heart"></i></button></li>
                     </ul>
                   </div>
                   <div class="card-body">
-                    <p>Accessories</p>
-                    <h4 class="card-product__title"><a href="#">{{ $element->ten_san_pham }}</a></h4>
+                 
+                    <h4 class="card-product__title"><a href='{{ route('chitietsanpham',[$element->id,$element->ten_khong_dau]) }}'>{{ $element->ten_san_pham }}</a></h4>
                     <p class="card-product__price">{{ $element->gia }}</p>
                   </div>
                 </div>

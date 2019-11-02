@@ -68,13 +68,13 @@
               <div class="card-product__img">
                 <img class="card-img" src="../upload/{{ $element->hinh }}" alt="">
                 <ul class="card-product__imgOverlay">
-                  <li><button><i class="ti-search"></i></button></li>
+                  <li><button><a class="ti-search "  href='{{ route('chitietsanpham',[$element->id,$element->ten_khong_dau]) }}'></a></button></li>
                   <li><button class='themgiohang' id='{{ $element->id }}' gia='{{ $element->gia }}'><i class="ti-shopping-cart"></i></button></li>
                   <li><button><i class="ti-heart"></i></button></li>
                 </ul>
               </div>
               <div class="card-body">
-                <p>Accessories</p>
+               
                 <h4 class="card-product__title"><a href='{{ route('chitietsanpham',[$element->id,$element->ten_khong_dau]) }}'>{{ $element->ten_san_pham }}</a></h4>
                 <p class="card-product__price"> {{ number_format($element->gia) }}đ</p>
               </div>

@@ -25,7 +25,7 @@
               <li><a class="active" ><span>Category</span> {{ $sanpham->ten_danh_muc }}</a></li>
               
             </ul>
-            <p>{{$sanpham->mota}}</p>
+            <p>{{$sanpham->mo_ta}}</p>
             <div class="product_count">
               <label for="qty">Quantity:</label>
               <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
