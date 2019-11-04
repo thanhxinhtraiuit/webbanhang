@@ -27,29 +27,18 @@
     <!--================ Hero banner start =================-->
 
     <!--================ Hero Carousel start =================-->
+ 
     <section class="section-margin mt-0">
       <div class="owl-carousel owl-theme hero-carousel">
+        @foreach($slide as $element)
         <div class="hero-carousel__slide">
-          <img src="img/home/hero-slide1.png" alt="" class="img-fluid">
-          <a href="#" class="hero-carousel__slideOverlay">
-            <h3>Wireless Headphone</h3>
-            <p>Accessories Item</p>
+          <img src="{{ asset('upload').'/'.$element['hinh'] }}" alt="" class="img-fluid">
+          <a href="{{ route('listsanpham',[$element['iddanhmuc'],str_slug($element['tendanhmuc'])]) }}" class="hero-carousel__slideOverlay">
+            <h3>{{ $element['tendanhmuc'] }}</h3>
+           {{--  <p>Accessories Item</p> --}}
           </a>
         </div>
-        <div class="hero-carousel__slide">
-          <img src="img/home/hero-slide2.png" alt="" class="img-fluid">
-          <a href="#" class="hero-carousel__slideOverlay">
-            <h3>Wireless Headphone</h3>
-            <p>Accessories Item</p>
-          </a>
-        </div>
-        <div class="hero-carousel__slide">
-          <img src="img/home/hero-slide3.png" alt="" class="img-fluid">
-          <a href="#" class="hero-carousel__slideOverlay">
-            <h3>Wireless Headphone</h3>
-            <p>Accessories Item</p>
-          </a>
-        </div>
+        @endforeach
       </div>
     </section>
     <!--================ Hero Carousel end =================-->
@@ -127,7 +116,7 @@
                 </ul>
               </div>
               <div class="card-body">
-                <p>Accessories</p>
+                {{-- <p>Accessories</p> --}}
                 <h4 class="card-product__title"><a href='{{ route('chitietsanpham',[$element->id,$element->ten_khong_dau]) }}'>{{ $element->ten_san_pham }}</a></h4>
                 <p class="card-product__price"> {{ number_format($element->gia) }}đ</p>
               </div>
@@ -161,7 +150,7 @@
                 </ul>
               </div>
               <div class="card-body">
-                <p>Accessories</p>
+            {{--     <p>Accessories</p> --}}
                 <h4 class="card-product__title"><a href='{{ route('chitietsanpham',[$element->id,$element->ten_khong_dau]) }}'>{{ $element->ten_san_pham }}</a></h4>
                 <p class="card-product__price"> {{ number_format($element->gia) }}đ</p>
               </div>

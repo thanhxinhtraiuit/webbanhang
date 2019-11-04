@@ -59,6 +59,7 @@
   <script src="{{ asset('nguoidung/vendors/mail-script.js') }}"></script>
   <script src="{{ asset('nguoidung/js/main.js') }}"></script>
   <script src="{{ asset('nguoidung/js/giohang.js') }}"></script>
+  <script src="{{ asset('nguoidung/js/nguoidung.js') }}"></script>
   <script src="{{ asset('nguoidung/js/timkiem.js') }}"></script>
   <script src="{{ asset('plugin/toastr/toastr.min.js') }}"></script>
   @yield('scripts')

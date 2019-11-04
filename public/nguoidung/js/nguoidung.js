@@ -41,5 +41,26 @@ $(document).ready(function (){
 
 		});
 	});
+	$('.tinh').on('change',function(){
+		var id=$(this).find('option:selected').val();
+		var url = "/lay-huyen";
+		$.ajax({
+				url:url,
+				method:'get',
+				data:{
+					id,
 
+				},
+				success:function(data){
+					if(data.status==1){
+						var html = "";
+						for(var i=0 ;i<data.data.length;i++){
+							html+="<option value="+data.data[i].Id+"> "+data.data[i].Title+" </option>"
+						}
+
+						$('#huyen').html(html);
+					}
+				}
+		});
+	});
 });

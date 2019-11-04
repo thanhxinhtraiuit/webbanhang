@@ -52,7 +52,7 @@
 
                 <div class='dropdown '>
                 <input type="text" class='form-control mb-1 otimkiem  dropdown-toggle'  data-toggle="dropdown">
-                <ul class="dropdown-menu">
+                {{-- <ul class="dropdown-menu">
                                       <li class=" nav-item mb-1 "><a class="nav-link" href="http://localhost:8000/1/samsung">Samsung</a></li>
                                       <li class="  row nav-item mb-1"><a class="nav-link" href="http://localhost:8000/2/iphone">Iphone</a></li>
                                       <li class="row nav-item mb-1"><a class="nav-link" href="http://localhost:8000/3/xiaomi">Xiaomi</a></li>
@@ -60,13 +60,18 @@
                                       <li class="row nav-item mb-1"><a class="nav-link" href="http://localhost:8000/5/viivo">ViIVO</a></li>
                                     
                   
-                </ul>
+                </ul> --}}
                  <button><i class="ti-search"></i></button>
                 </div>
                 </li>
                 {{-- <button><i class="ti-search"></i></button></li> --}}
               <li class="nav-item"><button class='btngiohang' href={{ route('giohang') }}><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
-              <li class="nav-item"><a class="button button-header" href="#">Login</a></li>
+              @if (!Auth::check())
+                <li class="nav-item"><a class="button button-header" href="{{ route('dangnhap') }}">Login</a></li>
+                @else
+                <li class="nav-item"><a class="button button-header" href="{{ route('dangxuat') }}">LogOut</a></li>
+              @endif
+              
             </ul>
           </div>
         </div>

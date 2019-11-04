@@ -51,7 +51,7 @@ Route::get('them-gio-hang','GiohangController@ThemGiohang');
 
 Route::get('xoa-gio-hang','GiohangController@XoaGiohang' );
 
-Route::get('tong-gio-hang','GiohangCOntroller@GetTonggiohang');
+Route::get('tong-gio-hang','GiohangController@GetTonggiohang');
 
 Route::get('chi-tiet-san-pham/{id}/{tenkhongdau}','SanphamController@GetChitietsanpham')->name('chitietsanpham');
 
@@ -66,7 +66,11 @@ Route::get('xep-giam-dan','NguoidungController@GetDesc')->name('GetDesc');
 Route::get('xep-tang-dan','NguoidungController@GetAsc')->name('GetAsc');
 
 
-Route::get('dang-nhap','NguoidungController@GetDangnhap');
+Route::get('dang-nhap','NguoidungController@GetDangnhap')->name('dangnhap');
 Route::post('dang-nhap','NguoidungController@PostDangnhap');
-Route::get('dang-ky','NguoidungController@GetDangky');
+Route::get('dang-ky','NguoidungController@GetDangky')->name('dangky');
 Route::post('dang-ky','NguoidungController@PostDangky');
+Route::get('dang-xuat','NguoidungController@GetDangxuat')->name('dangxuat');
+Route::get('don-hang','NguoidungController@GetDonhang')->name('donhang');
+Route::get('lay-huyen','NguoidungController@GetLayhuyen');
+Route::get('lay-xa','NguoidungController@GetLayxa');
