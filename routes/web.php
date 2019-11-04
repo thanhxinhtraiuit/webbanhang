@@ -55,7 +55,6 @@ Route::get('tong-gio-hang','GiohangController@GetTonggiohang');
 
 Route::get('chi-tiet-san-pham/{id}/{tenkhongdau}','SanphamController@GetChitietsanpham')->name('chitietsanpham');
 
-Route::get('lab1','LabController@GetIndex');
 Route::get('tong-tien','GiohangController@Tongtien');
 Route::get('/{id}/{ten}', 'SanphamController@GetListsanpham')->name('listsanpham');
 
@@ -74,3 +73,4 @@ Route::get('dang-xuat','NguoidungController@GetDangxuat')->name('dangxuat');
 Route::get('don-hang','NguoidungController@GetDonhang')->name('donhang');
 Route::get('lay-huyen','NguoidungController@GetLayhuyen');
 Route::get('lay-xa','NguoidungController@GetLayxa');
+Route::get('xoa-sesstion','NguoidungController@Xoasesstion');

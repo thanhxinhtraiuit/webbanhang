@@ -194,5 +194,8 @@ class NguoidungController extends Controller
        $a =$this->GetXa();
        // dd($a);
     }
-
+    public function Xoasesstion(){
+        session()->flush();
+        
+    }
 }
