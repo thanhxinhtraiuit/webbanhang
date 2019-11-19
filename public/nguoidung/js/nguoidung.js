@@ -54,13 +54,41 @@ $(document).ready(function (){
 				success:function(data){
 					if(data.status==1){
 						var html = "";
+						html+=' <select class="country_select p_star"  >';
 						for(var i=0 ;i<data.data.length;i++){
-							html+="<option value="+data.data[i].Id+"> "+data.data[i].Title+" </option>"
+							html+="<option value="+data.data[i].Id+"> "+data.data[i].Title+" </option>";
 						}
-
+						html+='</select>';
 						$('#huyen').html(html);
 					}
 				}
 		});
 	});
+
+
+	$('#huyen').on('change',function(){
+		var id=$(this).find('option:selected').val();
+		var url = "/lay-xa";
+		$.ajax({
+				url:url,
+				method:'get',
+				data:{
+					id,
+
+				},
+				success:function(data){
+					if(data.status==1){
+						var html = "";
+						html+=' <select class="country_select p_star"  >';
+						for(var i=0 ;i<data.data.length;i++){
+							html+="<option value="+data.data[i].Id+"> "+data.data[i].Title+" </option>";
+						}
+						html+='</select>';
+						$('#xa').html(html);
+					}
+				}
+		});
+	});
+
+
 });

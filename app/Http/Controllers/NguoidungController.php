@@ -114,8 +114,9 @@ class NguoidungController extends Controller
         $data=$this->GetHuyen($request->id);
         return response()->json(['status'=>1,'data'=>$data]);
     }  
-    public function GetLayxa(){
-        
+    public function GetLayxa(Request $request){
+        $data=$this->GetXa($request->id);
+        return response()->json(['status'=>1,'data'=>$data]);
     }
     public function CallApi($url){
         // $data = array("name" => "Hagrid", "age" => "36");

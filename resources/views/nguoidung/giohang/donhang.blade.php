@@ -20,16 +20,16 @@
                                 
                             </select>
                         </div>
-                         <div class="col-md-12 form-group p_star">
-                            <select class="country_select" id='huyen'>
-                              
-                            </select>
+                         <div class="col-md-12 form-group p_star" id='huyen'>
+                           
+                                
+                            
                         </div>
                          <div class="col-md-12 form-group p_star" id='xa'>
-                            <select class="country_select">
-                              
-                            </select>
+                        
                         </div>
+
+
                         <div class="col-md-12 form-group p_star">
                             <input type="text" class="form-control" id="add1" name="add1">
                             <span class="placeholder" data-placeholder="Address line 01"></span>
