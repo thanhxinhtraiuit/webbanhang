@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Sanpham;
 use App\Danhmuc;
+use App\GioHang;
+use App\Hoadon;
+use App\Chitiethoadon;
 use Hash;
 use Auth;
 use AuthenticatesUsers;
@@ -106,10 +109,7 @@ class NguoidungController extends Controller
         Auth::logout();
         return redirect()->route('trangchu');
     }
-    public function GetDonhang(){
-        $data['tinh']=$this->GetTinh();
-        return view('nguoidung.giohang.donhang',$data);
-    }
+
     public function GetLayhuyen(Request $request){
         $data=$this->GetHuyen($request->id);
         return response()->json(['status'=>1,'data'=>$data]);
@@ -177,6 +177,112 @@ class NguoidungController extends Controller
         }
 
     }
+
+    public function GetDonhang(){
+        if(!Auth::check()){return redirect()->route('dangnhap');}
+        $data['tinh']=$this->GetTinh();
+        
+      
+        $data['giohang']=$this->GetGiohangDB();
+       
+        $data['tongtien']=$this->Tongtien();
+        return view('nguoidung.giohang.donhang',$data);
+    }
+
+    public function PostDonhang(Request $request){
+        $hoadon = new Hoadon;
+        $hoadon->id_nguoi_dung=Auth::user()->id;
+        $hoadon->tongtien=$this->tongtien()-30000;
+        $hoadon->ho_ten=$request->ten;
+        $hoadon->sdt =$request->sdt;
+        $hoadon->email=$request->email;
+        $hoadon->dia_chi=$request->tinh."-".$request->huyen."-".$request->xa."-".$request->diachi;
+        $hoadon->save();
+
+        $giohang=$this->GetGiohangDB();
+
+        foreach ($giohang as $value) {
+            $chitiethoadon =new Chitiethoadon;
+            $chitiethoadon->id_hoa_don=$hoadon->id;
+            $chitiethoadon->id_san_pham=$value['sanpham']->id;
+            $chitiethoadon->so_luong=$value['sl'];
+            $chitiethoadon->tong_tien=$value['sanpham']->gia*$value['sl'];
+            $chitiethoadon->save();
+        }
+
+        //send mail
+
+        $noidung = null;
+        foreach ($giohang as $value) {
+             $noidung .= '<tr>
+                     <td style="padding-top:5px;padding-bottom:5px;font-size:14px;font-family:Helvetica Neue,Arial,sans-serif;color:#3c4043;text-align:left;line-height:1.55em" width="50%">
+                        <div style="color:#3c4043;margin:0px;font-size:12px;line-height:22px;font-weight:normal;font-size:15px;padding-right:10px">
+                           '.$value['sanpham']->ten_san_pham.'
+                        </div>
+                     </td>
+                     <td style="padding-top:5px;padding-bottom:5px;font-size:14px;font-family:Helvetica Neue,Arial,sans-serif;color:#3c4043;text-align:left;line-height:1.55em" width="50%">
+                        <div style="color:#3c4043;margin:0px;font-size:12px;line-height:22px;font-weight:normal;font-size:15px">
+                           '.$value['sl'].'
+                        </div>
+                     </td>
+                  </tr>';
+        }
+        $noidung .= '<tr>
+                     <td style="padding-top:5px;padding-bottom:5px;font-size:14px;font-family:Helvetica Neue,Arial,sans-serif;color:#3c4043;text-align:left;line-height:1.55em" width="50%">
+                        <div style="color:#3c4043;margin:0px;font-size:12px;line-height:22px;font-weight:bold;font-size:15px;padding-right:10px">
+                           Tổng cộng
+                        </div>
+                     </td>
+                     <td style="padding-top:5px;padding-bottom:5px;font-size:14px;font-family:Helvetica Neue,Arial,sans-serif;color:#3c4043;text-align:left;line-height:1.55em" width="50%">
+                        <div style="color:#3c4043;margin:0px;font-size:12px;line-height:22px;font-weight:bold;font-size:15px">
+                           '.number_format($hoadon->tongtien).'đ
+                        </div>
+                     </td>
+                  </tr>';
+
+            $contents = \File::get("mau-mail.html");
+
+            $diachi = $hoadon->dia_chi;
+            $thoigian = $hoadon->created_at;
+            $khoanthanhtoan = number_format($this->tongtien())."đ";
+            // $to = "";
+             
+             $contents=str_replace("{&noidung}", $noidung, $contents);
+             $contents=str_replace("{&diachi}", $diachi, $contents);
+             $contents=str_replace("{&thoigian}", $thoigian, $contents);
+             $contents=str_replace("{&khoanthanhtoan}", $khoanthanhtoan  , $contents);
+       
+
+        $guiMail = new GuimailController;
+       $a1 =  $guiMail->sendEmail($request->email,$request->ten,"Xac nhan don Hàng",$contents);
+        $a2 = $guiMail->sendEmail("thanh147zz@gmail.com","adminpro","Hoá đơn người mua hàng",$contents);
+
+        return "thanh cong $a1 - $a2";
+    }
+
+
+    public function GetGiohangDB(){
+        $giohang = GioHang::where('id_nguoi_dung',Auth::user()->id)->get();
+        // echo $giohang;die;
+        if(empty($giohang)){
+            return redirect()->route('trangchu');
+        }
+
+        $sanpham= [];
+        foreach ($giohang as  $value) {
+            
+            $sanpham[]=[
+               'sanpham' =>Sanpham::find($value->id_san_pham),
+               'sl'=>$value->so_luong,
+
+        ];
+        
+     
+        
+    }
+         return $sanpham;
+    }
+
     public function GetTinh (){
        $a=$this->CallApi('https://thongtindoanhnghiep.co/api/city');
        $data=json_decode($a,true);
@@ -198,5 +304,22 @@ class NguoidungController extends Controller
     public function Xoasesstion(){
         session()->flush();
         
+    }
+     public function Tongtien(){
+        if(!Auth::check()){
+        $data=Session::get('giohang');
+        $sum=0;
+        foreach ($data as $value) {
+           $sum+=$value['gia']*$value['sl'];
+        }
+        return $sum;
+        }else {
+            $sum=0;
+            $giohang=GioHang::where('id_nguoi_dung',Auth::user()->id)->get();
+            foreach ($giohang as $value) {
+                $sum+=$value->gia*$value->so_luong;
+            }
+            return $sum;
+        }
     }
 }

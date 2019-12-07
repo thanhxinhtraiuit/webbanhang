@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Danhmuc extends Model
+class Hoadon extends Model
 {
-    
-    protected	$table = 'danhmuc';
+    protected $table='hoadon';
 }

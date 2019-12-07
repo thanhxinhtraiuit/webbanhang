@@ -9,24 +9,35 @@ use Illuminate\Http\Request;
 
 class GiohangController extends Controller
 {
+
     public function GetGiohang(){
           // Session::forget('giohang'); 
         $sanpham=null;
     	if(!Auth::check()){
+
         $sanpham=$this->GetGiohangSS(); 
+
         }else {
+
         $sanpham=$this->GetGiohangDB();
-        
+            
         }
          $data['giohang']=$sanpham;
+//echo($sanpham);die;
+         if(!$sanpham){
+             //dd('abc');
+            return redirect()->route('trangchu');
+         }
+
         return view('nguoidung.giohang.giohang',$data);
 
     }
+    
     public function GetGiohangDB(){
         $giohang = GioHang::where('id_nguoi_dung',Auth::user()->id)->get();
         // echo $giohang;die;
         if(empty($giohang)){
-            return redirect()->route('trangchu');
+             return false;
         }
         $sanpham= [];
         foreach ($giohang as  $value) {
@@ -41,13 +52,14 @@ class GiohangController extends Controller
         
     }
          return $sanpham;
-}
+    }
     private function GetGiohangSS(){
         $giohang=Session::get('giohang');
-       
+      // dd($giohang);die;
         $sanpham= [];
         if(empty($giohang)){
-            return redirect()->route('trangchu');
+
+            return false;
         }
         foreach ($giohang as  $value) {
             $sanpham[]=[
@@ -156,8 +168,12 @@ class GiohangController extends Controller
         }
         return $sum;
         }else {
-            $giohang=GioHang::where('id_nguoi_dung',Auth::user()->id)->sum('gia');
-            return $giohang;
+            $sum=0;
+            $giohang=GioHang::where('id_nguoi_dung',Auth::user()->id)->get();
+            foreach ($giohang as $value) {
+                $sum+=$value->gia*$value->so_luong;
+            }
+            return $sum;
         }
     }
     

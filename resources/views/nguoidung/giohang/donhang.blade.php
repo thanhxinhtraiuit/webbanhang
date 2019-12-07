@@ -8,19 +8,20 @@
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Billing Details</h3>
+                    <h3>Chọn Tỉnh </h3>
                     <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                        @csrf
                         
                         <div class="col-md-12 form-group p_star ">
 
-                            <select class="country_select tinh ">
+                            <select class="country_select tinh " name="tinh">
                                 @foreach ($tinh as $element)
-                                    <option value="{{ $element['Id'] }}">{{ $element['Title'] }}</option>
+                                    <option id="{{ $element['Id'] }}" value="{{ $element['Title'] }}">{{ $element['Title'] }}</option>
                                 @endforeach
                                 
                             </select>
                         </div>
-                         <div class="col-md-12 form-group p_star" id='huyen'>
+                         <div class="col-md-12 form-group p_star" id='huyen' >
                            
                                 
                             
@@ -29,27 +30,38 @@
                         
                         </div>
 
-
                         <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add1" name="add1">
-                            <span class="placeholder" data-placeholder="Address line 01"></span>
+                            <label for="">Địa chỉ chi tiết</label>
+                            <input type="text" class="form-control"  name="diachi">
+
+                            <label for="">Họ Tên</label>
+                             <input type="text" class="form-control"  name="ten">
+
+                            <label for="">Số Điện Thoại</label>
+                             <input type="number" class="form-control"  name="sdt">
+
+                            <label for="">Email</label>
+                             <input type="email" class="form-control"  name="email">
+
+
                         </div>
                         
-                    </form>
+                    
                 </div>
                 <div class="col-lg-4">
                     <div class="order_box">
                         <h2>Your Order</h2>
                         <ul class="list">
                             <li><a href="#"><h4>Product <span>Total</span></h4></a></li>
-                            <li><a href="#">Fresh Blackberry <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Tomatoes <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
+                            @foreach ($giohang as $element)
+                                <li><a href="#">{{ $element['sanpham']->ten_san_pham }}<span class="middle">x {{ $element['sl'] }}</span> <span class="last">{{number_format( $element['sanpham']->gia*$element['sl']) }}</span></a></li>
+                            @endforeach
+                            
                         </ul>
                         <ul class="list list_2">
-                            <li><a href="#">Subtotal <span>$2160.00</span></a></li>
-                            <li><a href="#">Shipping <span>Flat rate: $50.00</span></a></li>
-                            <li><a href="#">Total <span>$2210.00</span></a></li>
+                            <li><a href="#">Subtotal <span>{{ number_format($tongtien) }}</span></a></li>
+                            <li><a href="#">Shipping <span>{{ number_format('30000') }}</span></a></li>
+                            <li><a href="#">Total <span>{{  number_format($tongtien-30000) }}</span></a></li>
                         </ul>
                         <div class="payment_item">
                             <div class="radion_btn">
@@ -76,8 +88,9 @@
                             <a href="#">terms & conditions*</a>
                         </div>
                         <div class="text-center">
-                          <a class="button button-paypal" href="#">Proceed to Paypal</a>
+                          <input type="submit" name="" class="button button-paypal" value="Mua"> 
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

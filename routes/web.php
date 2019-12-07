@@ -35,13 +35,13 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('xuat-hang','KhohangController@GetXuathang');
     Route::post('xuat-hang','KhohangController@PostXuathang');
     // Route::get('lay-inventoryid','KhohangController@GetInventoryid')->name('getinventoryid');
-    // Route::post('test','KhohangController@test');
+    
     Route::get('danh-sach-coupon','CouponController@GetDanhsach')->name('danhsachcoupon');
     Route::get('them-coupon','CouponController@GetThem')->name('themcoupon');
     Route::post('them-coupon','CouponController@PostThem');
 
 });
-
+Route::get('test','GuimailController@sendEmail');
 // Route::get('trang-chu','NguoidungController@GetTrangchu')->name('trangchu');
 Route::get('','NguoidungController@GetTrangchu')->name('trangchu');
 
@@ -71,6 +71,7 @@ Route::get('dang-ky','NguoidungController@GetDangky')->name('dangky');
 Route::post('dang-ky','NguoidungController@PostDangky');
 Route::get('dang-xuat','NguoidungController@GetDangxuat')->name('dangxuat');
 Route::get('don-hang','NguoidungController@GetDonhang')->name('donhang');
+Route::Post('don-hang','NguoidungController@PostDonhang');
 Route::get('lay-huyen','NguoidungController@GetLayhuyen');
 Route::get('lay-xa','NguoidungController@GetLayxa');
 Route::get('xoa-sesstion','NguoidungController@Xoasesstion');

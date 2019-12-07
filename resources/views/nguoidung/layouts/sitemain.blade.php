@@ -100,7 +100,7 @@
     <section class="section-margin calc-60px">
       <div class="container">
         <div class="section-intro pb-60px">
-          <p>Popular Item in the market</p>
+          
           <h2>Best <span class="section-intro__style">Sellers</span></h2>
         </div>
        <div class="row">
@@ -134,7 +134,7 @@
     <section class="section-margin calc-60px">
       <div class="container">
         <div class="section-intro pb-60px">
-          <p>Popular Item in the market</p>
+         
           <h2> New <span class="section-intro__style">Product</span></h2>
         </div>
        <div class="row" id='lastnew'>

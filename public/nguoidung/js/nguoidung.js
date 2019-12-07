@@ -42,7 +42,7 @@ $(document).ready(function (){
 		});
 	});
 	$('.tinh').on('change',function(){
-		var id=$(this).find('option:selected').val();
+		var id=$(this).find('option:selected').attr('id');
 		var url = "/lay-huyen";
 		$.ajax({
 				url:url,
@@ -54,9 +54,9 @@ $(document).ready(function (){
 				success:function(data){
 					if(data.status==1){
 						var html = "";
-						html+=' <select class="country_select p_star"  >';
+						html+=' <select class="country_select p_star" name="huyen" >';
 						for(var i=0 ;i<data.data.length;i++){
-							html+="<option value="+data.data[i].Id+"> "+data.data[i].Title+" </option>";
+							html+="<option id="+data.data[i].Id+ " value='"+data.data[i].Title+"'> "+data.data[i].Title+" </option>";
 						}
 						html+='</select>';
 						$('#huyen').html(html);
@@ -67,7 +67,7 @@ $(document).ready(function (){
 
 
 	$('#huyen').on('change',function(){
-		var id=$(this).find('option:selected').val();
+		var id=$(this).find('option:selected').attr('id');
 		var url = "/lay-xa";
 		$.ajax({
 				url:url,
@@ -79,9 +79,9 @@ $(document).ready(function (){
 				success:function(data){
 					if(data.status==1){
 						var html = "";
-						html+=' <select class="country_select p_star"  >';
+						html+=' <select class="country_select p_star" name="xa"  >';
 						for(var i=0 ;i<data.data.length;i++){
-							html+="<option value="+data.data[i].Id+"> "+data.data[i].Title+" </option>";
+							html+="<option  value='"+data.data[i].Title+"'> "+data.data[i].Title+" </option>";
 						}
 						html+='</select>';
 						$('#xa').html(html);
